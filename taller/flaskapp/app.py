@@ -12,21 +12,19 @@ def hello_world():
 
 
 @app.route("/departamentos")
-def los_estudiantes():
+def departamentos():
     """
     """
     r = requests.get("http://localhost:8000/departamentos/",
-                     auth=(usuario, clave))
-    estudiantes = json.loads(r.content)['results']
-    return render_template("templates/losestudiantes.html", estudiantes=estudiantes)
+                     auth=(usuario, clave)).json()
+    return render_template("list.html", datos=r)
 
 
 @app.route("/edificios")
-def los_telefonos():
+def edificios():
     """
     """
     r = requests.get("http://localhost:8000/edificios/",
-                     auth=(usuario, clave))
-    datos = json.loads(r.content)['results']
-    return render_template("templates/lostelefonos.html", datos=datos
+                     auth=(usuario, clave)).json()
+    return render_template("list.html", datos=r
                            )

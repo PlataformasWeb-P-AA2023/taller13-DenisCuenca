@@ -1,5 +1,10 @@
 # taller13
 
+### Integrantes:
+* Roger Criollo
+* Jandry Jaramillo
+* Denis Cuenca
+
 ## Creación de Servicio Web y Consumo vía Flask
 
 ### Revisar

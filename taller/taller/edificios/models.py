@@ -34,8 +34,30 @@ class Edificio(models.Model):
         return valor
 
 
+class Propietario(models.Model):
+    nombre = models.CharField(max_length=255)
+    apellido = models.CharField(max_length=255)
+    cedula = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.nombre
+
+    def edifnombres(self):
+        l = (i.edificio.nombre for i in self.departamentos.all())
+
+        # for i in self.departamentos.all():
+        #     l += (i.edificio.nombre)
+
+        return set(l)
+
+    def obtener_numDeps(self):
+        valor = [t for t in self.departamentos.all()]
+        valor = len(valor)
+        return valor
+
+
 class Departamento(models.Model):
-    nombrePropietario = models.CharField(max_length=30)
+    propietario = models.ForeignKey(Propietario, on_delete=models.CASCADE, related_name="departamentos")
     costo = models.FloatField()
     num_cuartos = models.IntegerField()
 
@@ -43,7 +65,7 @@ class Departamento(models.Model):
                                  related_name="Departamentos")
 
     def _str_(self):
-        return "%s %s %d %s" % (self.nombrePropietario,
+        return "%s %s %d %s" % (self.propietario,
                                 self.costo,
                                 self.num_cuartos,
                                 self.edificio)

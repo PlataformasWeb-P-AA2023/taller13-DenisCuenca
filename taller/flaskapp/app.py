@@ -15,16 +15,25 @@ def hello_world():
 def departamentos():
     """
     """
-    r = requests.get("http://localhost:8000/departamentos/",
-                     auth=(usuario, clave)).json()
-    return render_template("list.html", datos=r)
+    r = requests.get("http://localhost:8000/departamentos/").json()
+    print(r)
+    return render_template("list_departamentos.html", datos=r)
 
 
 @app.route("/edificios")
 def edificios():
     """
     """
-    r = requests.get("http://localhost:8000/edificios/",
-                     auth=(usuario, clave)).json()
-    return render_template("list.html", datos=r
+    r = requests.get("http://localhost:8000/edificios/").json()
+    return render_template("list_edificios.html", datos=r
+                           )
+
+
+@app.route("/propietarios")
+def propietarios():
+    """
+    """
+    r = requests.get("http://localhost:8000/propietario/").json()
+    print(r)
+    return render_template("list_propietarios.html", datos=r
                            )
